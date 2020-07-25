@@ -1,12 +1,20 @@
 import React from 'react';
 import Header from './Header';
-import PostCard from './Post';
+import Post from './Post';
 
-const ContentPage = () => {
+const ContentPage = (props) => {
   return (
     <div>
       <Header/>
-      <PostCard/>
+      <Post
+        username={props.activeUser}
+        imgName="post__image1"
+        image={require("./assets/images/food1.jpg")}
+        caption="wow food!"
+        />
+      {/* <Post/>
+      <Post/>
+      <Post/> */}
     </div>
   );
 };

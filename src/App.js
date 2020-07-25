@@ -7,7 +7,9 @@ import ContentPage from './Components/ContentPage';
 function App() {
   return (
     <div className="App">
-      <ContentPage/>
+      <ContentPage
+        activeUser="sunrisechef"
+      />
       {/* <Landing/> */}
     </div>
   );
