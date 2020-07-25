@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-const firebaseApp = firebase.intializeApp({
+const firebaseApp = firebase.initializeApp({
   apiKey: "AIzaSyCAa6Vg9RbJmzugrEIJ4UxpRe5O65O9oH0",
   authDomain: "react-photo-app-honeyai.firebaseapp.com",
   databaseURL: "https://react-photo-app-honeyai.firebaseio.com",

@@ -5,34 +5,26 @@ import { useEffect } from 'react';
 import {database} from '../fireBase';
 
 const ContentPage = (props) => {
-  const [posts, setPosts] = useState([
-    {
-      username: props.activeUser,
-      imgName: "post__image",
-      image: require("./assets/images/food1.jpg"),
-      caption: "wow food!"
-    },
-    {
-      username: props.activeUser,
-      imgName: "post__image",
-      image: require("./assets/images/food2.jpg"),
-      caption: "wow food!"
-    },
-  ]);
+  const [posts, setPosts] = useState([]);
 
   //useEffect -> runs code with specific conditions
   useEffect(() => {
-    //code
-    database.collection('Posts').onSnapshot(snapShot) //onSnapshot is a listener. anytime the Posts database is modified it takes a snapshot this will fire.
-  
+    //onSnapshot is a listener. anytime the Posts database is modified it takes a snapshot this will fire.
+    database.collection('Posts').onSnapshot(snapshot => {
+      setPosts(snapshot.docs.map(doc => ({
+        id: doc.id,
+        post: doc.data()
+      })));
+    }) 
   }, []); //<< adding [] means run this code only once. Why does it mean that tho?
 
   return (
     <div>
       <Header/>
       {
-        posts.map(post => (
+        posts.map(({id, post}) => (
           <Post 
+            key={id}
             username={post.username}
             imgName={post.imgName}
             image={post.image}
