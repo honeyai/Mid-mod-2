@@ -1,0 +1,24 @@
+.headerContainer {
+  /* border: solid; */
+  height: 12vh;
+  background-color: #EBF5DF;
+  border-bottom: 0.05rem solid #e0ebd4;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.logo {
+  /* keeps the image at aspect-ratio */
+  height: 25%;
+  object-fit: contain;
+  margin-right: 1rem;
+}
+
+.logoName {
+  font-family: 'AnaktoriaRegular';
+  font-weight: normal;
+  font-style: normal;
+  font-size: xx-large;
+}
