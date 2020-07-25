@@ -1,6 +1,6 @@
 import React from 'react';
 import Header from './Header';
-import PostCard from './PostCard';
+import PostCard from './Post';
 
 const ContentPage = () => {
   return (

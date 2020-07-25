@@ -11,12 +11,12 @@ const Landing = () => {
     <div>
       <div className="landingContainer">
         <Title 
-        name="heading__landingWelcome" 
-        content={
-          <span>
-            Welcome back, {activeUser}
-          </span>
-        }
+          name="landing__landingWelcome" 
+          content={
+            <span>
+              Welcome back, {activeUser}
+            </span>
+          }
         />
       </div>
     </div>
