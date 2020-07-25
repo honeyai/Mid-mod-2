@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Heading = (props) => {
+const Title = (props) => {
   return (
     <div>
       <p className={props.name}>{props.content}</p>
@@ -8,4 +8,4 @@ const Heading = (props) => {
   );
 };
 
-export default Heading;
+export default Title;

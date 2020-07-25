@@ -1,6 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
-import Heading from './Heading';
+import Title from './Title';
 import './Styles/landing.css'
 
 const Landing = () => {
@@ -10,8 +10,8 @@ const Landing = () => {
   return (
     <div>
       <div className="landingContainer">
-        <Heading 
-        name="landingWelcome" 
+        <Title 
+        name="heading__landingWelcome" 
         content={
           <span>
             Welcome back, {activeUser}

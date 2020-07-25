@@ -1,13 +1,14 @@
 import React from 'react';
-import Heading from './Heading';
+import Title from './Title';
+import ProfileToken from './profileToken';
 
-const userSelectScreen = () => {
+const UserSelectScreen = () => {
   return (
     <div>
-      <Heading name="userSelectLanding" content="Sign in"/>
-      
+      <Title name="userSelectLanding" content="Sign in"/>
+      <ProfileToken/>
     </div>
   );
 };
 
-export default userSelectScreen;
+export default UserSelectScreen;
