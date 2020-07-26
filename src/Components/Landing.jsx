@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import Title from './Title';
 import './Styles/landing.css'
+import SignInModal from './SignInModal';
 
 const Landing = () => {
 
@@ -14,10 +15,18 @@ const Landing = () => {
           name="landing__landingWelcome" 
           content={
             <span>
-              Welcome back, {activeUser}
+              <SignInModal/>
             </span>
           }
         />
+        {/* <Title 
+          name="landing__landingWelcome" 
+          content={
+            <span>
+              Welcome back, {activeUser}
+            </span>
+          }
+        /> */}
       </div>
     </div>
   );

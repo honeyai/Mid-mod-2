@@ -6,7 +6,6 @@ import {database} from '../fireBase';
 
 const ContentPage = (props) => {
   const [posts, setPosts] = useState([]);
-
   //useEffect -> runs code with specific conditions
   useEffect(() => {
     //onSnapshot is a listener. anytime the Posts database is modified it takes a snapshot this will fire.
@@ -24,7 +23,7 @@ const ContentPage = (props) => {
       {
         posts.map(({id, post}) => (
           <Post 
-            key={id}
+            key={id} //this allows the page to only render the new post as opposed to all of them
             username={post.username}
             imgName={post.imgName}
             image={post.image}
