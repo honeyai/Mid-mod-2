@@ -2,11 +2,11 @@ import React from 'react';
 import { useState } from 'react';
 import Title from './Title';
 import './Styles/landing.css'
-import SignInModal from './SignUpModal';
+import SignInModal from './SignInModal';
 
 const Landing = () => {
 
-  const [activeUser, setUser] = useState("SunriseChef")
+  // const [activeUser, setUser] = useState("")
 
   return (
     <div>

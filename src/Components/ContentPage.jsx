@@ -3,8 +3,9 @@ import Header from './Header';
 import Post from './Post';
 import { useEffect } from 'react';
 import {database} from '../firebase';
+import ImageUpload from './ImageUpload';
 
-const ContentPage = (props) => {
+const ContentPage = () => {
   const [posts, setPosts] = useState([]);
   //useEffect -> runs code with specific conditions
   useEffect(() => {
@@ -31,6 +32,7 @@ const ContentPage = (props) => {
           />
         ))
       }
+      <ImageUpload/>
     </div>
   );
 };
