@@ -2,8 +2,17 @@ import React, { useEffect } from 'react';
 import Modal from '@material-ui/core/Modal';
 import { useState } from 'react';
 import { Button, Input } from '@material-ui/core';
-import './Styles/signUpModal.css'
+import './Styles/signInModal.css'
 import { auth } from '../firebase';
+
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link
+} from "react-router-dom";
+import ContentPage from './ContentPage';
+import { render } from '@testing-library/react';
 
 const SignUpModal = () => {
 
@@ -16,11 +25,11 @@ const SignUpModal = () => {
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(authUser => { //listening for user log
-      if(authUser) {
+      if (authUser) {
         //if logged in
         console.log(authUser);
         setUser(authUser); //<<this uses cookie tracking thus it survives a refresh, keeping you logged in
-        
+
       } else {
         //logged out
         setUser(null);
@@ -30,14 +39,14 @@ const SignUpModal = () => {
     return () => {
       //this will make sure the useEffect listener does fire over and over unnecessarily 
       //if detaches the listener before refiring
-      unsubscribe(); 
+      unsubscribe();
     }
 
   }, [user, username]);//<<runs it once
 
   const signUp = event => {
     event.preventDefault();
-                                      //these are got from the states on lines 11 n 12
+    //these are got from the states on lines 11 n 12
     auth.createUserWithEmailAndPassword(email, password).then((authUser) => {
       return authUser.user.updateProfile({
         displayName: username,
@@ -52,18 +61,23 @@ const SignUpModal = () => {
     auth.signInWithEmailAndPassword(email, password).catch((error) => alert(error.message))
 
     setOpenSignIn(false); //close after submit
+    render(<ContentPage />)
   }
 
   return (
     <div>
-      {user ? (      
-        <Button id="signUpModal__button" onClick={() => auth.signOut()}>Logout</Button>
-      ): (
-        <div className="loginContainer">
-          <Button id="signUpModal__button" onClick={() => setOpenSignIn(true)}>Sign In</Button>
-          <Button id="signUpModal__button" onClick={() => setOpen(true)}>Sign Up</Button>
+      {user ? (
+        <div className="newpage__wrapper">
+          <ContentPage element={
+            <Button id="signUpModal__button" onClick={() => auth.signOut()}>Logout</Button>}/>
         </div>
-      )}
+      ) : (
+          <div className="loginContainer">
+            <Button id="signUpModal__button" onClick={() => setOpenSignIn(true)}>Sign In</Button>
+
+            <Button id="signUpModal__button" onClick={() => setOpen(true)}>Sign Up</Button>
+          </div>
+        )}
       <Modal
         className="signUpModal__container"
         open={open}
@@ -79,7 +93,7 @@ const SignUpModal = () => {
                 <span className="logoName">Momentka</span>
               </header>
             </center>
-            
+
             <Input
               className="signUpInput"
               placeholder="username"
@@ -101,7 +115,7 @@ const SignUpModal = () => {
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
-            
+
             <Button type="submit" id="signUpModal__button" onClick={signUp}>Sign Up</Button>
           </form>
         </div>

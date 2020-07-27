@@ -4,8 +4,9 @@ import Post from './Post';
 import { useEffect } from 'react';
 import {database} from '../firebase';
 import ImageUpload from './ImageUpload';
+import './Styles/contentPage.css'
 
-const ContentPage = () => {
+const ContentPage = (props) => {
   const [posts, setPosts] = useState([]);
   //useEffect -> runs code with specific conditions
   useEffect(() => {
@@ -19,8 +20,8 @@ const ContentPage = () => {
   }, []); //<< adding [] means run this code only once. Why does it mean that tho?
 
   return (
-    <div>
-      <Header/>
+    <div className="contentPage__wrapper">
+      <Header name="contentPage__logoutButton" element={props.element}/>
       {
         posts.map(({id, post}) => (
           <Post 

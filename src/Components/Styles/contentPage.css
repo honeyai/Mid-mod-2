@@ -1,0 +1,8 @@
+.contentPage__wrapper {
+  background-color: #e0ebd4;
+  height: 100vh;
+  width: 100vw;
+  grid-row: 1;
+  z-index: 0;
+  margin: 0;
+}

@@ -44,3 +44,7 @@
   align-items: center;
   justify-content: flex-end;
 }
+
+.newpage__wrapper{
+  display: grid;
+}
