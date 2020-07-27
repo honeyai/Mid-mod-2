@@ -12,7 +12,7 @@ const SignUpModal = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState(false);
   const [user, setUser] = useState(null);
-  const [signIn, setSign] = useState("");
+  const [openSignIn, setOpenSignIn] = useState("");
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(authUser => { //listening for user log
@@ -20,16 +20,7 @@ const SignUpModal = () => {
         //if logged in
         console.log(authUser);
         setUser(authUser); //<<this uses cookie tracking thus it survives a refresh, keeping you logged in
-        // if(authUser.displayName) {
-        //   //don't update the name
-        //   console.log(authUser.displayName);
-        //   setUser(authUser); //<<this uses cookie tracking thus it survives a refresh, keeping you logged in
-        // } else {
-        //   //just created a user? give firebase an attribute that hold their displayName
-        //   return authUser.updateProfile({
-        //     displayName: username,
-        //   })
-        // }
+        
       } else {
         //logged out
         setUser(null);
@@ -44,7 +35,7 @@ const SignUpModal = () => {
 
   }, [user, username]);//<<runs it once
 
-  const signUp = (event) => {
+  const signUp = event => {
     event.preventDefault();
                                       //these are got from the states on lines 11 n 12
     auth.createUserWithEmailAndPassword(email, password).then((authUser) => {
@@ -52,6 +43,15 @@ const SignUpModal = () => {
         displayName: username,
       })
     }).catch((error) => alert(error.message));
+
+    setOpen(false); //close after submit
+  }
+
+  const signIn = event => {
+    event.preventDefault();
+    auth.signInWithEmailAndPassword(email, password).catch((error) => alert(error.message))
+
+    setOpenSignIn(false); //close after submit
   }
 
   return (
@@ -60,7 +60,7 @@ const SignUpModal = () => {
         <Button id="signUpModal__button" onClick={() => auth.signOut()}>Logout</Button>
       ): (
         <div className="loginContainer">
-          <Button id="signUpModal__button" onClick={() => setOpen(true)}>Sign In</Button>
+          <Button id="signUpModal__button" onClick={() => setOpenSignIn(true)}>Sign In</Button>
           <Button id="signUpModal__button" onClick={() => setOpen(true)}>Sign Up</Button>
         </div>
       )}
@@ -106,8 +106,54 @@ const SignUpModal = () => {
           </form>
         </div>
       </Modal>
+      <Modal
+        className="signUpModal__container"
+        open={openSignIn}
+        onClose={() => setOpenSignIn(false)}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <div className="signUpModal__text">
+          <form action="" className="signUpModal__form">
+            <center>
+              <header className="signUpModal__header">
+                <img className="logo" src={require("./assets/images/cameraLogoBlack.webp")} alt="black camera" />
+                <span className="logoName">Momentka</span>
+              </header>
+            </center>
+            <Input
+              className="signUpInput"
+              placeholder="email"
+              type="text"
+              value={email}
+              onChange={(event) => setEmail(event.target.value)}
+            />
+            <Input
+              className="signUpInput"
+              placeholder="password"
+              type="password"
+              value={password}
+              onChange={(event) => setPassword(event.target.value)}
+            />
+            <Button type="submit" id="signUpModal__button" onClick={signIn}>Sign In</Button>
+          </form>
+        </div>
+      </Modal>
     </div>
   );
 };
 
 export default SignUpModal;
+
+
+//========NOTES======
+// if(authUser.displayName) {
+          //*don't update the name
+        //   console.log(authUser.displayName);
+        //   setUser(authUser); //*<<this uses cookie tracking thus it survives a refresh, keeping you logged in
+        // } else {
+          //*just created a user? give firebase an attribute that hold their displayName
+        //   return authUser.updateProfile({
+        //     displayName: username,
+        //   })
+        // }
