@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Modal from '@material-ui/core/Modal';
 import { useState } from 'react';
 import { Button, Input } from '@material-ui/core';
 import './Styles/signUpModal.css'
+import { auth } from '../firebase';
 
 const SignUpModal = () => {
 
@@ -10,19 +11,44 @@ const SignUpModal = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState(null)
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(authUser => { //listening for user log
+      if(authUser) {
+        //if logged in
+        console.log(authUser);
+        setUser(authUser); //<<this uses cookie tracking thus it survives a refresh, keeping you logged in
+
+        if(authUser.displayName) {
+          //don't update the name
+          console.log(authUser.displayName);
+          setUser(authUser); //<<this uses cookie tracking thus it survives a refresh, keeping you logged in
+        } else {
+          //just created a user? give firebase an attribute that hold their displayName
+          return authUser.updateProfile({
+            displayName: username,
+          })
+        }
+      } else {
+        //logged out
+        setUser(null);
+      }
+    })
+
+    return () => {
+      //this will make sure the useEffect listener does fire over and over unnecessarily 
+      //if detaches the listener before refiring
+      unsubscribe(); 
+    }
+
+  }, [user, username]);//<<runs it once
 
   const signUp = (event) => {
-
+    event.preventDefault();
+                                      //these are got from the states on lines 11 n 12
+    auth.createUserWithEmailAndPassword(email, password).catch((error) => alert(error.message));
   }
-  // const setUser = (event) => {
-
-  // }
-  // const signUp = (event) => {
-
-  // }
-  // const signUp = (event) => {
-
-  // }
 
   return (
     <div>
@@ -35,7 +61,7 @@ const SignUpModal = () => {
         aria-describedby="simple-modal-description"
       >
         <div className="signUpModal__text">
-          <form action="">
+          <form action="" className="signUpModal__form">
             <center>
               <header className="signUpModal__header">
                 <img className="logo" src={require("./assets/images/cameraLogoBlack.webp")} alt="black camera" />
@@ -43,24 +69,27 @@ const SignUpModal = () => {
               </header>
             </center>
             <Input
+              className="signUpInput"
               placeholder="username"
               type="text"
               value={username}
               onChange={(event) => setUsername(event.target.value)}
             />
             <Input
+              className="signUpInput"
               placeholder="email"
               type="text"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
             />
             <Input
+              className="signUpInput"
               placeholder="password"
               type="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
             />
-            <Button id="signUpModal__button" onClick={() => setOpen(true)}>Sign Up</Button>
+            <Button type="submit" id="signUpModal__button" onClick={signUp}>Sign Up</Button>
           </form>
         </div>
       </Modal>

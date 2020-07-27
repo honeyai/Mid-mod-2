@@ -1,8 +1,19 @@
+.signUpModal__form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.signUpInput {
+  margin: 1rem;
+}
+
 #signUpModal__button {
-  background-color: rgb(240, 234, 226);
+  background-color: #99A888;
   outline: none;
   color: black;
   width: 6rem;
+  align-self: center;
 }
 
 .signUpModal__text {

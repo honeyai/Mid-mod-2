@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Header from './Header';
 import Post from './Post';
 import { useEffect } from 'react';
-import {database} from '../fireBase';
+import {database} from '../firebase';
 
 const ContentPage = (props) => {
   const [posts, setPosts] = useState([]);
