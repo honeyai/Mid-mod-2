@@ -2,7 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import Title from './Title';
 import './Styles/landing.css'
-import SignInModal from './SignInModal';
+import SignInModal from './SignUpModal';
 
 const Landing = () => {
 
