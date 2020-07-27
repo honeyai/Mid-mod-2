@@ -11,7 +11,7 @@
 #signUpModal__button {
   background-color: #99A888;
   outline: none;
-  color: black;
+  color: rgb(232, 232, 232);
   width: 6rem;
   align-self: center;
 }
