@@ -33,7 +33,7 @@ const ContentPage = (props) => {
           />
         ))
       }
-      <ImageUpload/>
+      <ImageUpload displayName={props.userInfo}/>
     </div>
   );
 };

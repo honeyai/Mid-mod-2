@@ -46,5 +46,10 @@
 }
 
 .newpage__wrapper{
-  display: grid;
+  margin: 0;
+}
+
+.buttonsContainer {
+  margin: 0;
+  padding: 2rem;
 }

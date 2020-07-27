@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
 import { storage, database } from '../firebase';
 
-const ImageUpload = () => {
+const ImageUpload = (props) => {
 
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState(null);
@@ -38,8 +38,12 @@ const ImageUpload = () => {
               timestamp: database.firestore.FieldValue.serverTimestamp(), //after it all happens we collect a universal time of which we can organize the most recent posts.
               caption: caption,
               image: url,
-              username: 
-            })
+              username: props.displayName,
+            });
+
+            setProgress(0);
+            setCaption("");
+            setImage(null);
           })
       }
     )
@@ -47,6 +51,7 @@ const ImageUpload = () => {
 
   return (
     <div>
+      <progress value={progress} max="100"/>
       <input type="text" placeholder="Relive this moment..." onChange={event => setCaption(event.value)} value={caption} />
       <input type="file" onChange={handleChange} />
       <Button onClick={handleUpload}>
