@@ -1,15 +1,13 @@
 import React, { useState } from 'react';
 import { Button } from '@material-ui/core';
 import { storage, database } from '../firebase';
-import firebase from 'firebase';
 
 const ImageUpload = (props) => {
-  console.log("this is props.displayName", props.displayName)
-  console.log("this is the database",database.collection)
 
   const [caption, setCaption] = useState("");
   const [image, setImage] = useState(null);
   const [progress, setProgress] = useState(0);
+  // const 
 
   const handleChange = event => {
     if (event.target.files[0]) {
@@ -28,7 +26,7 @@ const ImageUpload = (props) => {
         setProgress(progress);
       },
       (error) => {
-        console.log(error.message);
+        console.error(error => error.message);
       },
       () => {
         storage
@@ -37,7 +35,7 @@ const ImageUpload = (props) => {
           .getDownloadURL()// upload event has already stored the file, but in order for my code to use this file in a post I need a url at which to access the image
           .then(url => {
             database.collection('Posts').add({
-              timestamp: firebase.firestore.FieldValue.serverTimestamp(), //after it all happens we collect a universal time of which we can organize the most recent posts.
+              timestamp: database.firestore.FieldValue.serverTimestamp(), //after it all happens we collect a universal time of which we can organize the most recent posts.
               caption: caption,
               image: url,
               username: props.displayName,
