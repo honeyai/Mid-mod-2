@@ -1,0 +1,40 @@
+
+.post__container {
+  border: 0.15rem solid #e0ebd4;
+  max-width: 34rem;
+  margin-bottom: 2.5rem;
+  /* padding: 3rem; */
+  /* display: flex;
+  flex-direction: column; */
+}
+
+.post__topline {
+  display: flex;
+  align-items: center;
+  margin: 0 1rem 1rem 1rem;
+}
+
+.post__toplineUsername {
+  margin-left: 1rem;
+  font-weight: bold;
+}
+
+.post__image {
+  border-top: 0.15rem solid #e0ebd4;
+  border-bottom: 0.15rem solid #e0ebd4;
+  width: 100%;
+  object-fit: contain;
+  /* margin: 2rem; */
+}
+
+.post__captionLine {
+  margin: 1rem;
+}
+
+.post__captionUsername {
+  font-weight: bold;
+}
+
+.post__caption {
+  font-weight: normal;
+}
