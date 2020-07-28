@@ -5,15 +5,6 @@ import { Button, Input } from '@material-ui/core';
 import './Styles/signInModal.css'
 import { auth } from '../firebase';
 
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Link
-} from "react-router-dom";
-import ContentPage from './ContentPage';
-import { render } from '@testing-library/react';
-
 const SignUpModal = () => {
 
   const [open, setOpen] = useState(false);
