@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { Button, Input } from '@material-ui/core';
 import './Styles/signInModal.css'
 import { auth } from '../firebase';
+import ContentPage from './ContentPage'
+
 
 const SignUpModal = () => {
 
@@ -52,7 +54,6 @@ const SignUpModal = () => {
     auth.signInWithEmailAndPassword(email, password).catch((error) => alert(error.message))
 
     setOpenSignIn(false); //close after submit
-    render(<ContentPage />)
   }
 
   return (
