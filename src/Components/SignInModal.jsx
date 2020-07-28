@@ -27,7 +27,6 @@ const SignUpModal = () => {
     const unsubscribe = auth.onAuthStateChanged(authUser => { //listening for user log
       if (authUser) {
         //if logged in
-        console.log(authUser);
         setUser(authUser); //<<this uses cookie tracking thus it survives a refresh, keeping you logged in
 
       } else {
@@ -67,17 +66,18 @@ const SignUpModal = () => {
   return (
     <div>
       {user ? (
+        console.log("this is user.displayName", user.displayName),
         <div className="newpage__wrapper">
           <ContentPage 
             element={
               <Button id="signUpModal__button" onClick={() => auth.signOut()}>Logout</Button>}
             userInfo={user.displayName}
+            
           />
         </div>
       ) : (
           <div className="buttonsContainer">
             <Button id="signUpModal__button" onClick={() => setOpenSignIn(true)}>Sign In</Button>
-
             <Button id="signUpModal__button" onClick={() => setOpen(true)}>Sign Up</Button>
           </div>
         )}
